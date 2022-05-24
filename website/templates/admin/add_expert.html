@@ -1,0 +1,61 @@
+{% extends "admin/base.html" %}
+{% block title %}Expert{% endblock %}
+{% block content %}
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class="row">
+
+
+            <div class="col-12 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Add Expert</h4>
+                        <p class="card-description">
+                            Add expert
+                        </p>
+                        <form class="forms-sample" id="expert" action="/add_expert" method="post" enctype="multipart/form-data">
+                            <div class="form-group">
+                                <label for="exampleInputName1">name</label>
+                                <input type="text" class="form-control" name="name" id="exampleInputName1" placeholder="name">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword4">Password</label>
+                                <input type="password" name="password" class="form-control" id="exampleInputPassword4"
+                                    placeholder="Password">
+                            </div>
+                            <!-- <div class="form-group">
+                                <label for="exampleSelectGender">Gender</label>
+                                <select class="form-control" id="exampleSelectGender">
+                                    <option>Male</option>
+                                    <option>Female</option>
+                                </select>
+                            </div> -->
+                            <div class="form-group">
+                                <label>File upload</label>
+                                <!-- <input type="file" name="image" class="file-upload-default"> -->
+                                <div class="input-group col-xs-12">
+                                    <input type="file" name="image" class="form-control file-upload-info"
+                                        placeholder="Upload Image">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleTextarea1" >Textarea</label>
+                                <textarea class="form-control" name="details" id="exampleTextarea1" rows="10"></textarea>
+                            </div>
+                            <button type="submit" form="expert" class="btn btn-primary mr-2">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+
+
+
+        </div>
+    </div>
+
+    {% endblock %}
