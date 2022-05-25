@@ -91,39 +91,38 @@
                         <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fas fa-table me-1"></i>
-                                DataTable Example
+                                problem
                             </div>
                             <div class="card-body">
                                 <table id="datatablesSimple">
                                     <thead>
                                         <tr>
-                                            <th>Name</th>
-                                            <th>Position</th>
-                                            <th>Office</th>
-                                            <th>Age</th>
-                                            <th>Start date</th>
-                                            <th>Salary</th>
+                                            <th>user</th>
+                                            <th>problem</th>
+                                            <th>problem image</th>
+                                            <th>date</th>
+                                            <th>answer</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
-                                            <th>Name</th>
-                                            <th>Position</th>
-                                            <th>Office</th>
-                                            <th>Age</th>
-                                            <th>Start date</th>
-                                            <th>Salary</th>
+                                            <th>user</th>
+                                            <th>problem</th>
+                                            <th>problem image</th>
+                                            <th>date</th>
+                                            <th>answer</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
+                                        {% for row in info%}
                                         <tr>
-                                            <td>Tiger Nixon</td>
-                                            <td>System Architect</td>
-                                            <td>Edinburgh</td>
-                                            <td>61</td>
-                                            <td>2011/04/25</td>
-                                            <td>$320,800</td>
+                                            <td>{{ row.3}}</td>
+                                            <td>{{ row.5[0:50]|safe}}</td>
+                                            <td>{{ row.6}}</td>
+                                            <td>{{ row.7}}</td>
+                                            <td><a href="/expert_answer/{{row.0}}"><button class="btn btn-success">Answer</button></a></td>
                                         </tr>
+                                        {% endfor %}
                                     </tbody>
                                 </table>
                             </div>

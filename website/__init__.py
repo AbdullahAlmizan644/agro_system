@@ -1,13 +1,14 @@
 from flask import Flask,Blueprint
 from flask_mysqldb import MySQL
 from flask_ckeditor import CKEditor
-
+from flask_mail import Mail,Message
 
 ckeditor = CKEditor()
 db=MySQL()
+mail=Mail()
 
 def create_app():
-    UPLOAD_FOLDER = 'C:\\Users\\abdul\\agro\\website\\static\\image'
+    UPLOAD_FOLDER = 'C:\\Users\\abdul\\OneDrive\\Desktop\\agro_system\\website\\static\\image'
     ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
     app=Flask(__name__)
     app.config['UPLOAD_FOLDER']=UPLOAD_FOLDER
@@ -16,6 +17,14 @@ def create_app():
     app.config['MYSQL_USER']='root'
     app.config['MYSQL_PASSWORD']=''
     app.config['MYSQL_DB']='agro_system'
+
+
+    app.config["MAIL_SERVER"]='smtp.gmail.com' 
+    app.config["MAIL_PORT"] = 465
+    app.config['MAIL_USE_TLS'] = False  
+    app.config['MAIL_USE_SSL'] = True  
+    app.config["MAIL_USERNAME"] = 'ulachingmarma819@gmail.com'  
+    app.config['MAIL_PASSWORD'] = '56634421'  
 
     def format_datetime(value, format="%d %b %Y %I:%M %p"):
         if value is None:
@@ -27,6 +36,7 @@ def create_app():
 
     db.init_app(app)
     ckeditor.init_app(app)
+    mail.init_app(app)
 
 
 

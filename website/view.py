@@ -1,8 +1,11 @@
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template,redirect,session,request,flash
 from website.__init__ import db,create_app
+from flask_mail import Mail,Message
+
+
 
 view=Blueprint('view',__name__)
-
+mail=Mail()
 
 @view.route("/")
 def index():
@@ -13,9 +16,25 @@ def index():
 
 
 
-@view.route("/contact")
+@view.route("/contact",methods=["GET","POST"])
 def contact():
-    return render_template("view/contact.html")
+    if "user" in session:
+        if request.method=="POST":
+            name=request.form.get("name")
+            email=request.form.get("email")
+            message=request.form.get("message")
+            if len(message)<20:
+                flash("please write greater than 20 alphabet.",category="error")
+                return redirect(request.url)
+
+            msg = Message(f'message from {name}',sender=email,recipients=['ulachingmarma819@gmail.com'])  
+            msg.body = str(message)  
+            mail.send(msg) 
+            flash("thanks for your message we will reply soon",category="success")
+            return redirect("/")
+        return render_template("view/contact.html")
+    else:
+        return redirect("/login")
 
 
 
@@ -28,7 +47,3 @@ def about():
 def service():
     return render_template("view/services.html")
 
-
-@view.route("/experts")
-def experts():
-    return render_template("view/expert.html")

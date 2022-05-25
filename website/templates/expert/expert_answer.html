@@ -80,15 +80,17 @@
                             <i class="fas fa-bars me-1"></i>
                             Write Answer
                         </div>
+                        <form action="/expert_answer/{{data[0]}}" id="ans" method="post">
                         <div class="card-body">
                             <div class="mb-3">
                                 <label for="exampleFormControlTextarea1" class="form-label">Write Answer</label>
-                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="15"></textarea>
+                                <textarea class="form-control" name="answer" id="exampleFormControlTextarea1" rows="15"></textarea>
                             </div>
                             <div class="mb-3">
-                                <button class="btn btn-success">Send</button>
+                                <button type="submit" form="ans" class="btn btn-success">Send</button>
                             </div>
                         </div>
+                    </form>
                     </div>
                 </div>
             </main>

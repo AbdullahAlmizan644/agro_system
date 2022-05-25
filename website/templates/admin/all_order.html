@@ -11,8 +11,8 @@
                         <div
                             class="d-flex align-items-center justify-content-between justify-content-md-center justify-content-xl-between flex-wrap mb-4">
                             <div>
-                                <p class="mb-2 text-md-center text-lg-left">Total Expert</p>
-                                <h1 class="mb-0">{{ total_experts[0]}}</h1>
+                                <p class="mb-2 text-md-center text-lg-left">Total orders</p>
+                                <h1 class="mb-0">{{ total_orders[0]}}</h1>
                             </div>
                             <i class="typcn typcn-briefcase icon-xl text-secondary"></i>
                         </div>
@@ -27,9 +27,8 @@
                         <div
                             class="d-flex align-items-center justify-content-between justify-content-md-center justify-content-xl-between flex-wrap mb-4">
                             <div>
-                                <!-- <p class="mb-2 text-md-center text-lg-left">Add Expert</p> -->
-                                <!-- <h1 class="mb-0">12</h1> -->
-                                <a href="/add_expert"><button class="btn btn-success">Add expert</button></a>
+                                <p class="mb-2 text-md-center text-lg-left">Pending orders</p>
+                                <h1 class="mb-0">{{ pending_orders[0]}}</h1>
                             </div>
                             <i class="typcn typcn-briefcase icon-xl text-secondary"></i>
                         </div>
@@ -37,6 +36,7 @@
                     </div>
                 </div>
             </div>
+
 
         </div>
 
@@ -48,24 +48,34 @@
                             <thead>
                                 <tr>
                                     <th class="ml-5">ID</th>
-                                    <th>name</th>
-                                    <th>password</th>
-                                    <th>image</th>
-                                    <th>Details</th>
+                                    <th>product</th>
+                                    <th>price</th>
+                                    <th>username</th>
+                                    <th>address</th>
                                     <th>Date</th>
+                                    <th>payment method</th>
+                                    <th>total payment</th>
+                                    <th>status</th>
                                     <th>Delete expert</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {% for user in experts %}
+                                {% for order in orders %}
                                 <tr>
-                                    <td>{{user.1}}</td>
-                                    <td>{{user.0}} </td>
-                                    <td>{{user.2}}</td>
-                                    <td>{{ user.3}}</td>
-                                    <td>{{user.4}}</td>
-                                    <td>{{user.5}}</td>
-                                    <td><a href="/delete_expert/{{user.0}}"><Button class="btn btn-danger">Delete</Button></a></td>
+                                    <td>{{order.0}}</td>
+                                    <td>{{order.1}}</td>
+                                    <td>{{order.2}}</td>
+                                    <td>{{order.3}}</td>
+                                    <td>{{order.4}}</td>
+                                    <td>{{order.5}}</td>
+                                    <td>{{order.6}}</td>
+                                    <td>{{order.7}}</td>
+                                    {% if order.8==0 %}
+                                    <td><a href="/update_order/{{order.0}}"><Button class="btn btn-success">pending</Button></a></td>
+                                    {% else %}
+                                    <td>Accept</td>
+                                    {% endif %}
+                                    <td><a href="/delete_order/{{order.0}}"><Button class="btn btn-danger">cancel</Button></a></td>
                                 </tr>
                                 {% endfor %}
                             </tbody>

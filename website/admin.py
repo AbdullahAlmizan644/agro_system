@@ -19,13 +19,29 @@ def dashboard():
         users=cur.fetchall()
 
         cur=db.connection.cursor()
-        cur.execute("SELECT count(sno) from users ")
+        cur.execute("SELECT count(sno) from users")
         total_user=cur.fetchone()
 
         cur=db.connection.cursor()
-        cur.execute("SELECT count(post_id) from posts ")
+        cur.execute("SELECT count(post_id) from posts")
         total_posts=cur.fetchone()
-        return render_template("admin/index.html",users=users,total_user=total_user,total_posts=total_posts)
+
+        cur=db.connection.cursor()
+        cur.execute("SELECT count(product_id) from products")
+        total_products=cur.fetchone()
+
+        cur=db.connection.cursor()
+        cur.execute("SELECT count(expert_id) from experts")
+        total_experts=cur.fetchone()
+
+        cur=db.connection.cursor()
+        cur.execute("SELECT count(order_id) from orders")
+        total_orders=cur.fetchone()
+
+        cur=db.connection.cursor()
+        cur.execute("SELECT count(order_id) from orders where status=%s",(1,))
+        pending_orders=cur.fetchone()
+        return render_template("admin/index.html",users=users,total_user=total_user,total_posts=total_posts,total_orders=total_orders,total_experts=total_experts,total_products=total_products,pending_orders=pending_orders)
     else:
         return redirect("/admin_login")
 
@@ -198,3 +214,41 @@ def delete_product(sno):
     cur.execute("Delete FROM products where product_id=%s",(sno,))
     db.connection.commit()
     return redirect("/all_product")
+
+
+
+
+@admin.route("/all_order")
+def all_order():
+    if "admin" in session:
+        cur=db.connection.cursor()
+        cur.execute("SELECT * FROM orders")
+        orders=cur.fetchall()
+
+        cur=db.connection.cursor()
+        cur.execute("SELECT count(order_id) from orders")
+        total_orders=cur.fetchone()
+
+        cur=db.connection.cursor()
+        cur.execute("SELECT count(order_id) from orders where status=%s",(1,))
+        pending_orders=cur.fetchone()
+        return render_template("admin/all_order.html",orders=orders,total_orders=total_orders,pending_orders=pending_orders)
+
+    else:
+        return redirect("/admin_login")
+
+
+@admin.route("/delete_order/<int:sno>")
+def delete_order(sno):
+    cur=db.connection.cursor()
+    cur.execute("Delete FROM orders where order_id=%s",(sno,))
+    db.connection.commit()
+    return redirect("/all_order")
+
+
+@admin.route("/update_order/<int:sno>")
+def update_order(sno):
+    cur=db.connection.cursor()
+    cur.execute("UPDATE orders set status=%s where order_id=%s",(1,sno,))
+    db.connection.commit()
+    return redirect("/all_order")

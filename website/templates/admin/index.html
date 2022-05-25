@@ -33,7 +33,7 @@
               class="d-flex align-items-center justify-content-between justify-content-md-center justify-content-xl-between flex-wrap mb-4">
               <div>
                 <p class="mb-2 text-md-center text-lg-left">Total Product</p>
-                <h1 class="mb-0">100</h1>
+                <h1 class="mb-0">{{ total_products[0]}}</h1>
               </div>
               <i class="typcn typcn-chart-pie icon-xl text-secondary"></i>
             </div>
@@ -53,6 +53,54 @@
               <i class="typcn typcn-clipboard icon-xl text-secondary"></i>
             </div>
             <canvas id="balance-chart" height="80"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 grid-margin stretch-card">
+        <div class="card">
+          <div class="card-body">
+            <div
+              class="d-flex align-items-center justify-content-between justify-content-md-center justify-content-xl-between flex-wrap mb-4">
+              <div>
+                <p class="mb-2 text-md-center text-lg-left">Total orders</p>
+                <h1 class="mb-0">{{total_orders.0}}</h1>
+              </div>
+              <i class="typcn typcn-briefcase icon-xl text-secondary"></i>
+            </div>
+            <canvas id="expense-chart" height="80"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 grid-margin stretch-card">
+        <div class="card">
+          <div class="card-body">
+            <div
+              class="d-flex align-items-center justify-content-between justify-content-md-center justify-content-xl-between flex-wrap mb-4">
+              <div>
+                <p class="mb-2 text-md-center text-lg-left">Pending orders</p>
+                <h1 class="mb-0 text-warning">{{pending_orders.0}}</h1>
+              </div>
+              <i class="typcn typcn-briefcase icon-xl text-secondary"></i>
+            </div>
+            <canvas id="expense-chart" height="80"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 grid-margin stretch-card">
+        <div class="card">
+          <div class="card-body">
+            <div
+              class="d-flex align-items-center justify-content-between justify-content-md-center justify-content-xl-between flex-wrap mb-4">
+              <div>
+                <p class="mb-2 text-md-center text-lg-left">Total experts </p>
+                <h1 class="mb-0">{{total_experts.0}}</h1>
+              </div>
+              <i class="typcn typcn-briefcase icon-xl text-secondary"></i>
+            </div>
+            <canvas id="expense-chart" height="80"></canvas>
           </div>
         </div>
       </div>

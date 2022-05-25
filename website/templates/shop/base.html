@@ -27,8 +27,28 @@
                 aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="/">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/about">About</a></li>
+                    <li class="nav-item"><a href="/" class="nav-link">Home</a></li>
+
+					{% if "user" in session %}
+					<li class="nav-item"><a href="/profile" class="nav-link">{{session["user"]}}</a></li>
+					{% else %}
+					<li class="nav-item"><a href="/login" class="nav-link">Login</a></li>
+					{% endif %}
+
+					<li class="nav-item"><a href="/shop" class="nav-link">Shop</a></li>
+					<li class="nav-item"><a href="/experts" class="nav-link">Agro Experts</a></li>
+
+					{% if "expert" in session %}
+					<li class="nav-item"><a href="/expert_dashboard" class="nav-link">{{session["expert"]}}</a></li>
+					{% else %}
+					<li class="nav-item"><a href="/expert_login" class="nav-link">Expert Login</a></li>
+					{% endif %}
+
+					
+					<li class="nav-item"><a href="/about" class="nav-link">About us</a></li>
+					<li class="nav-item"><a href="/service" class="nav-link">Services</a></li>
+					<li class="nav-item"><a href="/review" class="nav-link">Review</a></li>
+					<li class="nav-item"><a href="/contact" class="nav-link">Contact</a></li>
                 </ul>
                 <form class="d-flex">
                     <!-- <button class="btn btn-outline-dark" type="submit">
@@ -41,6 +61,24 @@
         </div>
     </nav>
     <!-- Header-->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+	{% if messages %}
+	<ul class=flashes>
+		{% for category, message in messages %}
+		{% if category == "error"%}
+		<div class="alert alert-danger" role="alert">
+			{{message}}
+		</div>
+		{% elif category=="success" %}
+		<div class="alert alert-success" role="alert">
+			{{message}}
+		</div>
+		{% endif %}
+		{% endfor %}
+	</ul>
+	{% endif %}
+	{% endwith %}
+
 
     {% block content %} {% endblock %}
 
@@ -53,7 +91,7 @@
     <!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Core theme JS-->
-    <script src="js/scripts.js"></script>
+    <script src={{url_for("static", filename="shop/js/scripts.js")}}></script>
 </body>
 
 </html>
